@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {MenuIcon} from "lucide-react";
+import {UserButton} from "@clerk/nextjs";
 
 export default function Navbar() {
     return(
@@ -41,6 +42,7 @@ export default function Navbar() {
             Get Started
           </span>
                 </Link>
+                <UserButton/>
                 <MenuIcon className="md:hidden" />
             </aside>
         </header>
