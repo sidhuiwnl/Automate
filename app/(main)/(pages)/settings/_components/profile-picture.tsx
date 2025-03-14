@@ -7,9 +7,11 @@ import {X} from "lucide-react";
 
 type Props = {
     userImage : string | null;
-    onDelete? : any;
-    onUpload? : any;
+    onDelete? : () => void;
+    onUpload? : (url : string) => any;
 }
+
+export const dynamic = "force-dynamic";
 
 export default function ProfilePicture({ onUpload,userImage,onDelete }: Props) {
     return(
@@ -28,12 +30,13 @@ export default function ProfilePicture({ onUpload,userImage,onDelete }: Props) {
                             </div>
                             <Button
                                 className="bg-transparent text-white/70 hover:bg-transparent hover:text-white"
+                                onClick={onDelete}
                             >
                                 <X/> Remove Logo
                             </Button>
                         </>
                     ) : (
-                        <UploadCareButton/>
+                        <UploadCareButton onUpload={onUpload} />
                     )
                 }
             </div>

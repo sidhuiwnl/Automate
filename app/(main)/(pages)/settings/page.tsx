@@ -42,10 +42,25 @@ export default  async function Settings() {
         })
         return response;
     }
+
+    const  updateUser = async (name : string) => {
+        "use server"
+
+        const response = await db.user.update({
+            where : {
+                clerkId : authUser.id
+            },
+            data : {
+                name,
+            }
+        })
+        return response;
+    }
+
     return (
         <div className="flex flex-col gap-4">
             <h1 className="sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-2xl backdrop-blur-lg">
-                <span>Settings</span>
+                Settings
             </h1>
             <div className="flex flex-col gap-10 p-6">
                 <div>
@@ -56,7 +71,10 @@ export default  async function Settings() {
                         userImage={user?.profileImage || ""}
                         onUpload={uploadImage}
                     />
-                    <ProfileForm/>
+                    <ProfileForm
+                        user={user}
+                        updateUser={updateUser}
+                    />
                 </div>
             </div>
         </div>

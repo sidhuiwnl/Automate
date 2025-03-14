@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {EditUserProfileSchema} from "@/lib/types";
 import {useForm} from "react-hook-form";
 import { z } from "zod";
@@ -10,20 +10,44 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Loader2} from "lucide-react";
 
-export default function ProfileForm() {
+
+
+type Props = {
+    user : any,
+    updateUser? : any,
+
+}
+
+export default function ProfileForm({user,updateUser}: Props) {
     const [isLoading,setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof EditUserProfileSchema>>({
         resolver : zodResolver(EditUserProfileSchema),
         defaultValues : {
-            name: "",
-            email: "",
+            name: user.name,
+            email: user.email,
         }
     })
+
+    const handleSubmit = async ( values : z.infer<typeof EditUserProfileSchema>) =>{
+        setIsLoading(true);
+        await updateUser(values.name)
+        setIsLoading(false);
+    }
+
+    useEffect(() => {
+        form.reset({
+            name: user.name,
+            email: user.email,
+        })
+    }, [user]);
+
     return (
 
             <Form {...form}>
-                <form className="flex flex-col gap-4 mt-5">
+                <form
+                    onSubmit={form.handleSubmit(handleSubmit)}
+                      className="flex flex-col gap-4 mt-5">
                     <FormField
                         disabled={isLoading}
                         control={form.control}
@@ -33,8 +57,10 @@ export default function ProfileForm() {
                                 <FormLabel className="text-sm">User Full name</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="Name"
                                         {...field}
+                                        placeholder="Name"
+
+
                                     />
                                 </FormControl>
                                 <FormMessage/>
@@ -51,8 +77,9 @@ export default function ProfileForm() {
                             <FormLabel className="text-sm">User Full name</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="Email"
                                     {...field}
+                                    placeholder="Email"
+
                                     type="email"
                                 />
                             </FormControl>
