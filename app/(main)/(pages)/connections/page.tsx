@@ -16,14 +16,15 @@ export default function Page(props : Props){
                     Connect all your apps directly from here. You may need to connect
                     these apps regularly to refresh verification
                     {CONNECTIONS.map((connection) => (
-                            <ConnectionCard
-                                key={connection.title}
-                                description={connection.description}
-                                title={connection.title}
-                                icon={connection.image}
-                                type={connection.title}
-                                // connection={connection}
-                            />
+                            // <ConnectionCard
+                            //     key={connection.title}
+                            //     description={connection.description}
+                            //     title={connection.title}
+                            //     icon={connection.image}
+                            //     type={connection.title}
+                            //     // connection={connection}
+                            // />
+                        <div> Working</div>
                         ))}
                 </section>
             </div>
