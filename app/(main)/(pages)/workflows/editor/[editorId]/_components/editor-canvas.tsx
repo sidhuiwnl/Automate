@@ -210,7 +210,7 @@ export default function EditorCanvas() {
             </ResizablePanel>
             <ResizableHandle/>
             <ResizablePanel
-                defaultSize={40}
+                defaultSize={20}
                 className="relative sm:block"
             >
                 {

@@ -41,14 +41,14 @@ export default function EditorCanvasSidebar({ nodes }: Props) {
                            <Card
                                key={cardKey}
                                draggable
-                               className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900"
+                               className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 h-20 overflow-hidden"
 
                            >
-                               <CardHeader className="flex flex-row items-center gap-4 p-4">
+                               <CardHeader className="flex flex-row items-center gap-4 w-full">
                                    <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} />
-                                   <CardTitle className="text-md">
+                                   <CardTitle className="text-md truncate">
                                        {cardKey}
-                                       <CardDescription>{cardValue.description}</CardDescription>
+                                       <CardDescription className="truncate">{cardValue.description}</CardDescription>
                                    </CardTitle>
                                </CardHeader>
                            </Card>
